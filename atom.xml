@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[TheLadders Engineering Stories]]></title>
+  <link href="http://dev.theladders.com/atom.xml" rel="self"/>
+  <link href="http://dev.theladders.com/"/>
+  <updated>2013-03-08T10:14:07-05:00</updated>
+  <id>http://dev.theladders.com/</id>
+  <author>
+    <name><![CDATA[TheLadders Engineering]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Eric Evans Is Coming to TheLadders]]></title>
+    <link href="http://dev.theladders.com/2013/03/eric-evans-is-coming-to-theladders/"/>
+    <updated>2013-03-08T10:09:00-05:00</updated>
+    <id>http://dev.theladders.com/2013/03/eric-evans-is-coming-to-theladders</id>
+    <content type="html"><![CDATA[<blockquote><p>&#8230; when the Man comes around.</p><footer><strong>&#8211;Johnny Cash</strong></footer></blockquote>
+
+
+<p>We are happy to announce that this April TheLadders will be hosting
+<a href="http://domainlanguage.com/about/">Eric Evans</a>, the codifier of
+<a href="http://domainlanguage.com/ddd/">Domain Driven Design</a>, for the New
+York City DDD Meetup group. Engineers at TheLadders have long been
+following developments in the DDD community. <a href="http://dev.theladders.com/ourteam/kyrisarantakos/">Some</a> of
+<a href="http://dev.theladders.com/ourteam/danielwislocki/">us</a> have already attended the DDD immersion course,
+<a href="http://dev.theladders.com/ourteam/kylewinter/">more</a> of <a href="http://dev.theladders.com/ourteam/mattjankowski/">us</a> will be attending it shortly, and
+our developers are regular participants in the <a href="http://www.dddnyc.org/">NYC DDD Meetup</a>.</p>
+
+<p>For those of you who might be unfamiliar with DDD, its goal is the
+design of software that creates business value. DDD guides technical
+and domain experts to collaboratively create a mental model of the
+central business concepts. This model is then used to drive
+design. This sounds like common sense: developers work with people who
+know about the business to make software that works to solve its
+problems. What could be more straightforward?  And yet, the complexity
+inherent in the business world and software engineering make it
+difficult to create software that is supple and adaptable to changing
+needs. DDD provides a framework for thinking about, creating, and
+communicating mental models. And that requires the learning of new
+skills and ideas. It isn’t an easy process, but we have found that it
+is rewarding for both the business and developers.</p>
+
+<h1>A Little of Our Experience with DDD</h1>
+
+<p>While creating our new website, we’ve tried to remain focused on
+“communicating mental models”. One way this can be done is through
+DDD’s “Intention-Revealing Interfaces”: interfaces that clearly
+communicate the contract between the domain model and its
+users. Judging from the vast amount of code out there, this simple
+idea is counterintuitive. Our own legacy codebase is no exception. For
+example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Subscription</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">AutoRenewFlags</span> <span class="nf">getAutoRenewFlag</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">autoRenewFlag</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAutoRenewFlag</span><span class="o">(</span><span class="n">AutoRenewFlags</span> <span class="n">autoRenewFlag</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">autoRenewFlag</span> <span class="o">=</span> <span class="n">autoRenewFlag</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUnsubscribeReason</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">unsubscribeReason</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUnsubscribeReason</span><span class="o">(</span><span class="kt">int</span> <span class="n">unsubscribeReason</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">unsubscribeReason</span> <span class="o">=</span> <span class="n">unsubscribeReason</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is an example of what in DDD is called an “anemic domain
+model”. The Subscription class is a key part of the domain, yet not
+only does it communicate nothing to the user about its usage, it in
+fact does nothing. Values can be retrieved and set, but what then? How
+do I actually unsubscribe someone? What prevents me from using any
+arbitrary integer for the “unsubscribe reason”? What about changing
+auto-renewal to null? There is no explicit contract here, and the user
+of this object is given no guidance or constraints. By contrast, we’ve
+worked hard in our newer code to avoid creating anemic domain models
+and instead create objects that are not only useful, but clear in
+their usage. Here is another example, this time from the new
+Subscription class:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Subscription</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>   <span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Subscription</span> <span class="nf">withAutoRenewOn</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Subscription</span> <span class="nf">withAutoRenewOff</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">CanceledSubscription</span> <span class="nf">unsubscribe</span><span class="o">(</span><span class="n">UnsubscribeReason</span> <span class="n">unsubscribeReason</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case we’ve attempted to make the contract clear. Calling the
+unsubscribe method actually unsubscribes the customer, returning a
+CanceledSubscription. The “unsubscribe reason” is now strongly typed,
+clearly communicating which values are allowed. Auto-renewal changes
+yield a new immutable Subscription object, and can be chained together
+with other &#8220;with*&#8221; methods to produce new subscriptions with appropriate
+settings.</p>
+
+<p>Another example of an anemic domain model, lacking an
+intention-revealing interface, comes from the old Payment class in our
+legacy codebase:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="nf">Payment</span><span class="o">(</span><span class="kt">int</span> <span class="n">paymentId</span><span class="o">,</span>
+</span><span class='line'>               <span class="kt">int</span> <span class="n">paymentActionType</span><span class="o">,</span>
+</span><span class='line'>               <span class="n">BigDecimal</span> <span class="n">amount</span><span class="o">,</span>
+</span><span class='line'>               <span class="n">String</span> <span class="n">approvalCode</span><span class="o">,</span>
+</span><span class='line'>               <span class="n">String</span> <span class="n">transactionReference</span><span class="o">,</span>
+</span><span class='line'>               <span class="kt">int</span> <span class="n">creditCardId</span><span class="o">)</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">this</span><span class="o">.</span><span class="na">paymentId</span> <span class="o">=</span> <span class="n">paymentId</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">this</span><span class="o">.</span><span class="na">paymentActionType</span> <span class="o">=</span> <span class="n">paymentActionType</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">this</span><span class="o">.</span><span class="na">amount</span> <span class="o">=</span> <span class="n">amount</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">this</span><span class="o">.</span><span class="na">approvalCode</span> <span class="o">=</span> <span class="n">approvalCode</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">this</span><span class="o">.</span><span class="na">creditCardId</span> <span class="o">=</span> <span class="n">creditCardId</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">this</span><span class="o">.</span><span class="na">transactionReference</span> <span class="o">=</span> <span class="n">transactionReference</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This class contains only the constructor you see here, and getters for
+each of the fields created. It turns out that it’s used as a parameter
+object, and nothing more. There’s no guidance as to it’s valid
+construction, and no hint about its usage. Yet obviously handling
+subscription payments is an important part of the subscription domain,
+and we want the contracts around the model of that domain clear and
+easy to understand. Here’s our attempt at accomplishing those goals in
+the new codebase:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="nf">Payment</span><span class="o">(</span><span class="n">PaymentAmount</span> <span class="n">paymentAmount</span><span class="o">,</span>
+</span><span class='line'>               <span class="n">JobseekerId</span> <span class="n">jobseekerId</span><span class="o">,</span>
+</span><span class='line'>               <span class="n">PaymentActionType</span> <span class="n">paymentActionType</span><span class="o">,</span>
+</span><span class='line'>               <span class="n">ReportGroup</span> <span class="n">reportGroup</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first difference is actually one that’s not visible from the code
+itself. As we’ve developed the new site, we’ve agreed that all
+arguments to methods or constructors are required; no passing of
+nulls. If an argument is truly optional, a separate method or
+constructor is added that excludes it. We want our code to be
+confident, and this contract means that methods and constructors “say
+what they mean and mean what they say”. In the legacy codebase, nulls
+were passed liberally to and fro, and you could never be quite sure
+which arguments were truly required.</p>
+
+<p>Another change is the promotion of this class from a mere parameter
+object to an active participant in the domain model:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">Receipt</span> <span class="nf">makeWith</span><span class="o">(</span><span class="n">PaymentMethod</span> <span class="n">method</span><span class="o">)</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="n">method</span><span class="o">.</span><span class="na">make</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="k">new</span> <span class="nf">Receipt</span><span class="o">(</span><span class="n">paymentAmount</span><span class="o">.</span><span class="na">asAmountPaid</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">recordWith</span><span class="o">(</span><span class="n">PaymentRecorder</span> <span class="n">paymentRecorder</span><span class="o">)</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="n">paymentRecorder</span><span class="o">.</span><span class="na">record</span><span class="o">(</span><span class="n">paymentAmount</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Instead of being passed around to “manager” objects and DAOs, a
+Payment object can actually make a payment and create records of
+itself. It seems only natural.</p>
+
+<p>There’s much more qto Domain Driven Design than I’ve shown here &#8211;
+this post barely scratches the surface. And as a team we know we still
+have much farther to go in its mastery, but the time we’ve spent in
+study and practice have been well worth the effort so far.</p>
+
+<p>We hope you’ll join us in April for an illuminating evening of
+presentation and discussion.</p>
+
+<p><a href="http://www.dddnyc.org/events/80390502/">RSVP for this meetup</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Riders on the Storm: Take a long holiday, Let your children play]]></title>
+    <link href="http://dev.theladders.com/2013/03/riders-on-the-storm-take-a-long-holiday-let-your-children-play/"/>
+    <updated>2013-03-04T13:52:00-05:00</updated>
+    <id>http://dev.theladders.com/2013/03/riders-on-the-storm-take-a-long-holiday-let-your-children-play</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://dev.theladders.com/images/lightning_storm.gif" title="'Lightning Storm'" ></p>
+
+<blockquote><p>It was the age of wisdom, it was the age of foolishness</p><footer><strong>&#8211;Charles Dickens</strong></footer></blockquote>
+
+
+<hr />
+
+<h1>Introduction</h1>
+
+<p>I’ve decided to split this blog post up into three different sections as we have gone through three different phases with our usage of Storm.  The first describes how we used to use Storm at TheLadders.  This is followed by our “wake up call”, forcing us to the realization that how we had been using Storm was not sufficient.  The “wake up call” has led us to our current state of how we now use Storm at TheLadders. But first for those of you who aren’t familiar with Storm, a quick explanation straight from the horse’s mouth:</p>
+
+<blockquote><p>Storm is a distributed real-time computation system. Similar to how Hadoop provides a set of general primitives for doing batch processing, Storm provides a set of general primitives for doing real-time computation. Storm is simple, can be used with any programming language, is used by many companies, and is a lot of fun to use!</p><footer><strong>Nathan Marz</strong> <cite><a href='https://github.com/nathanmarz/storm'>Storm Readme</a></cite></footer></blockquote>
+
+
+<hr />
+
+<h1>The Past</h1>
+
+<p>We were early users of Storm, starting out with the Storm 0.5.x releases and later upgrading to 0.6.2.  Our Storm cluster was very basic: Nimbus, Zookeeper with 2 Worker nodes;   5 topologies deployed, but only 3 of them really being exercised.  Many of these topologies were for non-critical portions of our application, as such we weren’t paying much attention to the cluster. The topologies we wrote had well-tested individual components; each of the Spouts and Bolts were written with testability in mind.  However we struggled when it came to end-to-end tests for an entire topology.</p>
+
+<p>Other areas of our Storm related pain were:</p>
+
+<ul>
+<li>Very limited visibility into the overall health of the Storm cluster.  We lacked any monitoring and had very few metrics regarding our cluster.  We relied a lot on tailing the logs of the worker nodes to see how things were behaving.</li>
+<li>We naively configured the topology resources, not really being aware of what resources were being used across the worker nodes.</li>
+<li>A majority of our topologies used RabbitMQ as the entry-point and we had a very basic AMQP Spout implementation.  In fact, the initial AMQP Spout increased CPU usage on our RabbitMQ nodes from 4-10% to 40-45% with very little message throughput.</li>
+<li>Guaranteed message processing was not always enforced (more due to lack of knowledge on the subject than anything).</li>
+</ul>
+
+
+<p>That list looks bad and one might wonder how we got along at all given those shortcomings.  To be honest, everything just “worked”, which was all we needed at that point.  The combination of Nimbus and Zookeeper did a great job of re-deploying topologies anytime “something” happened.  While we would occasionally open up the Storm web admin to see how things were doing, we really didn’t pay much attention to it; everything just worked.  Even the increase in RabbitMQ CPU usage was not considered overly serious because everything continued to work and was fairly stable.  This behavior continued for about a year or so.</p>
+
+<hr />
+
+<h1>The &#8220;Wake Up Call&#8221;</h1>
+
+<p>Then came the day when we needed to deploy a new feature in one of our topologies.  We ran the standard release script to deploy a topology through Nimbus, and … nothing…  After some digging, we found that Nimbus had run out of disk space and our topologies had not been pulling messages off of RabbitMQ for an estimated 3 – 7 days.</p>
+
+<p>In addition, shortly after this initial wake up call, we had some one-off topologies that needed to be run for a 24-hour period.  These topologies required a decent number of resources.  They quickly starved the existing topologies of resources and did a good job of bringing Storm to a screeching halt.  It was like watching a caged death match between all of our topologies that left everyone unconscious on the mat.</p>
+
+<p>If something like the 7-10 day outage can go unnoticed for so long, and if we could starve topologies at the drop of a hat, how could we expect to successfully expand our usage of Storm to more critical portions of the application?</p>
+
+<p>We needed to change, and fast!</p>
+
+<hr />
+
+<h1>The Present</h1>
+
+<p>We immediately started figuring out what we didn’t know about Storm and which bits were the most important for immediate success.  Some members of the development team got together with our operations team and worked out monitoring of cluster components. While Operations beefed up what they could, the development team:</p>
+
+<ul>
+<li>Enforced guaranteed message processing in all of our topologies.  This has mainly been done through the use of the BaseBasicBolt, which provides emitting anchored tuples and acking for free. <a href="http://nathanmarz.github.com/storm/doc/backtype/storm/topology/base/BaseBasicBolt.html">(http://nathanmarz.github.com/storm/doc/backtype/storm/topology/base/BaseBasicBolt.html)</a></li>
+<li>Refactored our AMQP Spout implementation to subscribe to a queue instead of using individual “gets”.  This has resulted in pre-Storm 0.6.2 levels of CPU usage on our RabbitMQ nodes (below 10% again).</li>
+<li>Added an additional three worker nodes with more memory and CPU so we don’t have to constantly worry about resource starvation (although this should always be something to consider really).</li>
+<li>Improved our unit testing of configured topologies using the simulated time cluster testing feature in Storm 0.8.1  <a href="https://github.com/xumingming/storm-lib/blob/master/src/jvm/storm/TestingApiDemo.java">(https://github.com/xumingming/storm-lib/blob/master/src/jvm/storm/TestingApiDemo.java)</a>:</li>
+</ul>
+
+
+<hr />
+
+<h1>The Future</h1>
+
+<p>Okay, so I lied.  There is a fourth phase: the future; where we plan to go with Storm.</p>
+
+<p>We plan on upgrading to Storm 0.8.2 very soon.  It has a much-improved web admin that allows for deployment and rebalancing of topologies on the fly.  We hope this simplifies the process of deploying and rebalancing (if needed) of our topologies.</p>
+
+<p>Upgrade to Storm 0.9.x as soon as possible once released.  We hear good things about this release; mainly the metric collecting which will be a huge win in terms of improving visibility into the streams and flow of tuples between Spouts and Bolts.</p>
+
+<p>Finally, we are plan on expanding our topologies to be more than simple queue-to-spout designs.  We are experimenting with using Storm for scheduled batch processes, hoping to have something in production within the next week.</p>
+
+<p>Hopefully this blog gave you a nice overview of how Storm can be used by a company.  I think one of the take-aways can be how easy Storm is to use.  Storm served us for over a year with very little intervention and minimal knowledge on our part; I believe this speaks volumes of Storm’s ease-of-use and reliability.</p>
+
+<p>Stay tuned for some more detailed technical blogs on some of the things we did to improve our Storm usage.</p>
+
+<p>Join the discussion over at <a href="http://www.reddit.com/r/programming/comments/19noko/how_we_use_twitters_storm_part_one/">reddit</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mutation testing with PIT: A step beyond normal code coverage]]></title>
+    <link href="http://dev.theladders.com/2013/02/mutation-testing-with-pit-a-step-beyond-normal-code-coverage/"/>
+    <updated>2013-02-20T03:15:15-05:00</updated>
+    <id>http://dev.theladders.com/2013/02/mutation-testing-with-pit-a-step-beyond-normal-code-coverage</id>
+    <content type="html"><![CDATA[<blockquote><p>&#8220;Program testing can be used to show the presence of bugs, but never to show their absence!&#8221;</p><footer><strong>&#8211;Edsger W. Dijkstra</strong></footer></blockquote>
+
+
+<p>When we started out building our <a href="http://www.cenedella.com/job-search/job-offer-guaranteed-signature/">Signature program</a>, we had a goal in mind - test the &lt;insert expletive of choice here&gt; out of it.  We also wanted to make sure that not only did we test it, but we tested it right.  Regular code line coverage tools like <a href="http://www.atlassian.com/software/clover/overview">Clover</a> are great, but typically only tell you that a line of code was executed - not necessarily that it was verified.  Many developers often see them as a way to determine what&#8217;s been tested, but in reality they are better at<em> highlighting code that hasn&#8217;t been tested at all</em>.</p>
+
+<p>Our interest in mutation testing stemmed from a talk about how occasionally we see bad/ineffective tests, ones that give the impression of testing the code but in reality don&#8217;t do a great job.  <a href="https://twitter.com/SeanTAllen">Sean T Allen</a> and I had apparently both already been looking into a new tool, because once the discussion came up we were already on the same page.  Enter <a href="http://pitest.org/">PIT</a>, a mutation testing tool under active development.  We decided to try it out in combination with Clover, and the results were:</p>
+
+<p><img class="center" src="http://dev.theladders.com/images/tim_and_eric_mind_blown.gif" title="'Tim and Eric Mind Blown gif')" ></p>
+
+<h1></h1>
+
+<h1>But first, what is mutation testing?</h1>
+
+<p>For those unfamiliar with how mutation testing works, I&#8217;ll offer a brief summary.  After your sources and tests are compiled and run, a mutation test framework like PIT will alter the program code and insert ‘mutations’, such as changing != to == or completely removing a line.  It will then run the tests that exercise that chunk of code again, with the expectation that at least one of them should now fail.  If your tests are well written, or more importantly, <em>complete</em>, then at least one assertion should have been broken by PIT’s change.  (For more, <a href="http://www.simple-talk.com/dotnet/.net-tools/mutation-testing/">Jeremy Jarrell’s introduction</a> (first 2 sections) sums it up pretty well)</p>
+
+<h1></h1>
+
+<h1>Your 100% coverage?  It’s a lie.</h1>
+
+<p>You write a test - it&#8217;s green and all is well.  But are you <em>certain</em> that it will fail if someone mistakenly alters the code?  “Yea, I have tons-o-coverage” you say?  Typical line coverage tools like Clover can lull you into a false sense of security by showing 100% coverage without really delivering on that promise.  And that’s probably fine - heck, a lot of teams/projects would be happy to break 90% overall line coverage (or 50%&#8230;or 20%).  But there are a few of us here that border on insane and try to push the envelope - more, more, more!</p>
+
+<h1>So what&#8217;s so great/different about mutation testing?</h1>
+
+<h2>Testing your tests:</h2>
+
+<p>One of the most important long-term benefits of a test is not knowing that it passes, but rather knowing that it will fail if the code is broken.  When not TDDing, I tend to alter the code or comment out blocks and ensure that the test fails as expected.  Sometimes we write tests that don&#8217;t fail correctly with the code they test: maybe because of a mistaken assumption, or maybe because of a slight oversight - it happens.  Mutation testing is an effective, automated way of enforcing that tests fail correctly.</p>
+
+<h2>Code is verified:</h2>
+
+<p>PIT provides a way of ensuring that you&#8217;ve written complete tests that verify the results of executing a piece of code.  The core concept of mutation testing is a powerful one - if you botch a line of code, a test should break somewhere.  If a test doesn&#8217;t break, it means your tests aren&#8217;t complete, the test may be wrong, or the line of code just flat out isn&#8217;t doing anything.  In one case, we discovered dead code that was identified by PIT when switching our storage model.</p>
+
+<p>Depending on how far you believe in test coverage in general and mutation testing itself, it can be a great ally.  We decided to aim high - test everything.  PIT was vital in ensuring that we were actually verifying each line of code that we set out to.</p>
+
+<h1></h1>
+
+<h1>An Example:</h1>
+
+<p>To illustrate an example of what PIT does, consider the below (very basic) class and test:</p>
+
+<figure class='code'><figcaption><span>PersonFactory</span><a href='https://github.com/TheLadders/pit-example/blob/master/src/main/java/com/theladders/PersonFactory.java'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonFactory</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">Person</span> <span class="nf">createPerson</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="s">&quot;First&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">person</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="s">&quot;Last&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">person</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>Person</span><a href='https://github.com/TheLadders/pit-example/blob/master/src/main/java/com/theladders/Person.java'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFirstName</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLastName</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLastName</span><span class="o">(</span><span class="n">String</span> <span class="n">lastName</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>PersonFactoryTest</span><a href='https://github.com/TheLadders/pit-example/blob/master/src/test/java/com/theladders/PersonFactoryTest.java'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonFactoryTest</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="nd">@Test</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonFactory</span><span class="o">().</span><span class="na">createPerson</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">firstName</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">lastName</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="na">getLastName</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&quot;First&quot;</span><span class="o">,</span> <span class="n">firstName</span><span class="o">);</span>
+</span><span class='line'>    <span class="c1">// forgot test for last name</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clover (and PIT) will say that the <em><strong>line</strong></em> coverage is 100%.  But at a close glance - how many untested pieces of code do you see?  PIT <em><strong>mutation</strong></em> coverage will point out that there are 2 - the call to person.setLastName(&#8220;Last&#8221;) and the getLastName() method.  Both were executed as part of the test, but neither are actually verified for correctness.</p>
+
+<h2>Clover Results:</h2>
+
+<h2><img src="http://dev.theladders.com/images/clover.png" alt="clover results" /></h2>
+
+<h2>PIT Results:</h2>
+
+<h2><img src="http://dev.theladders.com/images/pit-failure.png" alt="pit failure" /></h2>
+
+<h2><img src="http://dev.theladders.com/images/person-factory.png" alt="PersonFactory class" /></h2>
+
+<p>(Person report excluded for brevity)</p>
+
+<p>You’ll notice that the setLastName method in the PersonFactory is highlighted in red, with an explanation below:
+removed call to com/theladders/Person::setLastName : SURVIVED</p>
+
+<p>What this means is that PIT altered the code and removed the call to setLastName() completely, ran the tests again, and they all still passed - meaning that the mutation survived.  You’ll also notice that it tried the same thing for setFirstName(), but it was successfully killed by our test (it failed, as it should).</p>
+
+<p>Once we add a test for last name, we’ll see that PIT will now report that all mutations are killed.  Essentially what it means, is that PIT couldn’t find a way to screw with the code without breaking a test.</p>
+
+<figure class='code'><figcaption><span>PersonFactoryTest</span><a href='https://github.com/TheLadders/pit-example/blob/master/src/test/java/com/theladders/PersonFactoryTest.java'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonFactoryTest</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="nd">@Test</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonFactory</span><span class="o">().</span><span class="na">createPerson</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">firstName</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">lastName</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="na">getLastName</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&quot;First&quot;</span><span class="o">,</span> <span class="n">firstName</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&quot;Last&quot;</span><span class="o">,</span> <span class="n">lastName</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>PIT Results afterwards:</h2>
+
+<h2><img src="http://dev.theladders.com/images/pit-success.png" alt="Pit success" /></h2>
+
+<p>This was a very trivial example, and PIT supports much more than what I&#8217;ve shown you here.  As you may have noticed, I skipped over one of the killed mutations: if (x != null) null else throw new RuntimeException.  This is another type of fault that PIT will try to introduce for return objects.  The full list of mutations can be found <a href="http://pitest.org/quickstart/mutators/">here</a>.</p>
+
+<h1></h1>
+
+<h1>Our Experience with PIT:</h1>
+
+<p>We started using it last year on a new project with some really great success.  As part of it, we were building a RESTful web service with Jersey.  It was a green field project with no legacy code - everything written from scratch except for small internal libraries.  We tested almost every meaningful thing we could about the server (web interfaces, security XML configs, null validation rules, etc).  It was very heavy on integration tests - some just verified all the business components working together and some deployed the server on embedded Jetty and hit the web endpoints.  Towards the end we were maintaining around 98% in both Clover and PIT (excluding Data Transfer Object classes), and ended up around 95%.</p>
+
+<p>While we also used Clover for basic code coverage, as we got our PIT mutation coverage up into the 90s I stopped paying much attention to Clover.  Our use of PIT was to ensure that we were actually testing and verifying all the parts of the code that we thought we were, and to find the places where we needed to fill in more tests or assertions.  We would add/modify tests so that each line of code we wrote (almost) was also backed by an assertion somewhere.  Essentially, &#8220;Hey PIT, where do I need to add more tests and assertions?&#8221;</p>
+
+<p>This gave us extreme confidence in our tests - if the code was modified incorrectly (with some small exceptions), a test would break and we knew it.  The effects of that confidence were outstanding.  At TheLadders we place a lot of value in code quality and &#8220;doing things right,&#8221; so refactoring is a large part of our process.  It enabled us to refactor at will with little fear of breaking anything, which happened quite frequently in many different ways, especially as a new project growing from the ground up.</p>
+
+<p>The best example of a big win was a refactoring to shift how we stored and tracked state.  When we first started out, we were creating and updating rows in the database (update in place).  We decided to switch to an <a href="http://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a> approach - instead of storing/retrieving state in the database, we instead stored &#8216;actions&#8217; and inputs in the database and then rebuilt the state in memory from those actions.  This was a large change to how a lot of the internals operated, and would normally carry a big risk factor in breaking existing functionality.  In this case, that risk factor was minimal and hardly played a part in our decision.  Because of the confidence we had in our tests thanks to PIT (and the fact that the majority of them were high level integration tests), all we did was start switching over and making changes until the tests were green again, and we were done.  The tests were the ultimate source of how the server needed to act, and PIT helped ensure that those tests covered everything the server was expected to do.</p>
+
+<p>If you want to try it out yourself, the above example in code is available here: <a href="https://github.com/TheLadders/pit-example">https://github.com/TheLadders/pit-example</a></p>
+
+<p>Join the discussion over at <a href="http://www.reddit.com/r/programming/comments/18w2ia/who_tests_the_tests_mutation_testing_with_pit/">reddit</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Catechism of Code]]></title>
+    <link href="http://dev.theladders.com/2013/02/onboarding/"/>
+    <updated>2013-02-01T06:34:00-05:00</updated>
+    <id>http://dev.theladders.com/2013/02/onboarding</id>
+    <content type="html"><![CDATA[<blockquote><p>&#8220;Begin, be bold, and venture to be wise.&#8221;</p><footer><strong>&#8211;Horace</strong></footer></blockquote>
+
+
+<p>All things have a beginning, some cosmologists may disagree, but for our purposes we will assume the universe had a start. How things start sets the tone for how they will continue and ultimately how they will end. So it is with employment at TheLadders.</p>
+
+<p>If you ask the most recent developers to join TheLadders, <a href="http://twitter.com/johnconnolly">@johnconnolly</a> and <a href="http://twitter.com/casio_juarez">@casio_juarez</a>, they probably can point to more than a few bumps in the road. But learn, iterate, repeat. Starting today, we are introducing a new onboarding plan&#8230;</p>
+
+<h2><strong>Day Zero</strong></h2>
+
+<p>Once the usual HR paperwork is out of the way, get this:</p>
+
+<p><img src="http://dev.theladders.com/images/floating_flaming_retina_imac_15_inch.JPG" alt="15 inch retina macbook" /></p>
+
+<p>Install your favorite IDE and tools and <a href="https://github.com/SeanTAllen/OS-X-Customizations">make that MacBook your own</a>.</p>
+
+<h2><strong><strong>Day One</strong></strong></h2>
+
+<p>We’ll start you off working on a modified version of the Thoughtworks &#8220;Object Calisthenics&#8221; exercise. You can find our version on <a href="https://github.com/TheLadders/object-calisthenics">our github.</a></p>
+
+<p>Why? We&#8217;ve found that most programmers still have a very procedural mindset when it comes to code. They favor if statements over the use of polymorphic objects, tend towards code that spreads knowledge about domain objects across a wide range of classes (usually a wide range of controllers in most web apps)  and a variety of other potentially problematic tendencies. We originally did the Thoughtworks &#8220;Object Calisthenics&#8221; exercise as a team at TheLadders in September of 2012 to start a conversation about a variety of OO techniques that we rarely saw in our existing codebase. Each of the rules that the exercise lays down might seem silly in a production codebase, but they aren&#8217;t meant as hard and fast rules during day to day work. They are meant to guide the exercise and force you into thinking about coding in a way that you perhaps haven&#8217;t before. Things like:</p>
+
+<ul>
+<li><p>favoring polymorphic objects over conditionals</p></li>
+<li><p>observing the law of demeter</p></li>
+<li><p>not overloading classes with multiple responsibilities</p></li>
+</ul>
+
+
+<p>These rules are then applied to a kata that introduces new developers to a core part of TheLadders domain: applying to a job, and some of the key concepts: jobs, job seekers, recruiters, and resumes.</p>
+
+<p>Each new developer spends their first day working through the exercise with an existing member of our team. Discussing why you might want to follow a particular rule in production code, why you might not. Pairing through blockages where how to continue without violating the rules of exercise aren&#8217;t obvious. The overarching idea is to start a conversation about ideas that we think are valuable. The rules and the exercise are just a means to start that conversation in a concrete setting. I&#8217;m renowned in the office for getting very hand wavey while discussing complicated programming topics and having these conversation while working on code is much more effective.</p>
+
+<p>So great, that&#8217;s day 1, but we have a full 2 week onboarding so, what else do we do?</p>
+
+<h2><strong>Days Two to Six</strong></h2>
+
+<p>Start watching the SOLID series videos from Clean Coders, doing <a href="https://github.com/TheLadders/solid-exercises">exercises we have designed around them</a> and talking through the issues raised in the videos. Uncle Bob does an excellent job in the series of presenting engineering concepts in a way that firmly expresses that everything is a tradeoff. It has been said that &#8220;programmers know the value of everything and the tradeoffs of nothing&#8221;. I&#8217;ve always taken that to mean that many programmers need black and white rules for what to do and what not to do and have a hard time understanding the tradeoffs involved with a particular practice or design. All best practices need to be broken sometime, all good design patterns eventually become bad ones when put in certain contexts. Uncle Bob&#8217;s SOLID videos do an excellent job of both presenting the SOLID principles and discussing tradeoffs involved.</p>
+
+<p>That&#8217;s all well and good, but what does this really mean? Let&#8217;s jump into Day 2 and walk through what we do.</p>
+
+<ol>
+<li><p>Start by watching &#8221;<a href="http://cleancoders.com/codecast/clean-code-episode-9/show">Clean Code Episode 9: The Single Responsibility Principle</a>&#8221;</p></li>
+<li><p>Stop at key points during the episode to discuss salient points</p></li>
+<li><p>Talk more in general about the single responsibility principle, why you would want to apply it, etc. at the end</p></li>
+<li><p>Crack open some legacy Ladders&#8217; code that violates the single responsibility principle for a concrete example of the mess violating it can get you into</p></li>
+<li><p>Work together to refactor said code so that it no longer violates the single responsibility principle</p></li>
+</ol>
+
+
+<p>Not bad for Day 2. Hands on exposure to some of hairy areas of our legacy codebase and a chance to talk about the values we hope everyone on the development team shares.</p>
+
+<h2><strong>Day Seven and Beyond</strong></h2>
+
+<p>If you’re doing the math, you might notice that with 5 SOLID episodes that only gets us up to the end of Day 6 and two weeks is ten work days. What do we do with the other 4 days? Good question. We don&#8217;t know. We&#8217;ll never know because it will vary from person to person. We expect that over the course of the first six days, we&#8217;ll see areas that we should address. Perhaps we will go back over some concepts from the object calisthenics exercise that were confusing or problematic. Perhaps a crash course on domain modeling. Perhaps an overview of how we want to use hypermedia to drive our RESTful services. Maybe they need more time with the SOLID exercises. The possibilities are endless and driven by the individual we are seeking to bring on board.</p>
+
+<p>How have you been on-boarded at other companies?  We’d love to hear ideas for improving our own process, and don’t forget <a href="http://careers.theladders.com">we’re hiring</a>, so join TheLadders today and we will work hard to make your transition to our team as smooth as possible.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[New Beginnings]]></title>
+    <link href="http://dev.theladders.com/2013/01/new-beginnings/"/>
+    <updated>2013-01-31T06:59:09-05:00</updated>
+    <id>http://dev.theladders.com/2013/01/new-beginnings</id>
+    <content type="html"><![CDATA[<blockquote><p>&#8220;You must be the change you wish to see&#8230;&#8221;</p><footer><strong>&#8211;Gandhi</strong></footer></blockquote>
+
+
+<p><a href="http://dev.theladders.com/images/blinking_main.gif"><img src="http://dev.theladders.com/images/blinking_main.gif" alt="blinking_main" /></a></p>
+
+<p>Eight years ago today, I joined TheLadders.</p>
+
+<p>Back in January 2005, we were a small startup with only 25 employees. My first job was working on building a new version of TheLadders.com. At the time, there were only a few hundred lines of code and we spent the next few months working around the clock to deliver a new and improved website. When we were done and the site was launched, I remember my father asking me, “Now what? The site’s done; do you still have work to do?”</p>
+
+<p>We certainly had more work to do then and we still do now. Today, our mission is the same as when we started: finding the right person for the right job. As long as our customers face frustration  with their job search, we will be hard at work trying to help job seekers find their next job or employers their perfect candidate.</p>
+
+<p>As we embrace 2013, I am seeing the same kinds of change and excitement that I saw in 2005. Over the past eight years, we’ve learned a lot about the job search, and we’re making big moves to reflect a new way of discovering job opportunities and candidates.</p>
+
+<p>Fundamentally, we have changed the way we work. We threw long backlogs and task-lists out the window, and started working towards shared themes and goals among the whole company; not just technology, not just a single Scrum team. Themes shared by the CEO, marketing, sales, finance, customer service, product, tech and UX groups. With this approach, we have abandoned a traditional team structure previously set by executives and, instead, empowered our staff to determine how best to organize themselves to achieve our shared goals. We try and gather the right people in a room to solve a problem and we know they will make something great.</p>
+
+<p>Have we figured out the magic formula for software-development success? Perhaps. We are closer to being agile with a lowercase ‘a’ than ever before. We are making better decisions about how to best deploy our collective brainpower and talents. We are shipping value to our users faster. We are learning to say ‘no,’ affording us more time to focus on the work that best serves our users.</p>
+
+<p>Almost 20% of our traffic is coming from phones and tablets, so the new website for TheLadders is completely responsive. It renders well on desktops, tablets and mobile phones. And, we are not stopping with just some fancy CSS; more is coming on the mobile front in the next few months, so stayed tuned.</p>
+
+<p>Because finding the right job should be less tedious than searching through a database of titles, our team of data scientists and engineers work relentlessly to pair our users with the jobs that suit them best. You can still search if you want, but you do not have to be an expert on crafting keyword searches and filters to find relevant jobs; based on what you tell us, and also what you actually do online, we will find you those jobs.</p>
+
+<p>Matching is easy to say and hard to do well. We have to deal with a host of technical challenges, such as classifying jobs into our taxonomy, and we are employing machine-learning to do that. But, that is a topic for another blog post. If you are one of our more-than 5 million members,  you may have noticed some of our job-matching efforts with our new Targeted Hiring Alerts.</p>
+
+<p>Job descriptions are becoming a commodity; everybody’s got them.  So, what data do we have to augment them and provide our users with relevant job information they cannot get anywhere else? We’ve launched TheLadders <a href="http://blog.theladders.com/product/new-product-for-the-new-year/">Scout</a>, an innovative (and addictive) way to get a deeper understanding  for the job market and your competition. It is a start towards giving our users the data they need to make faster and more-informed decisions in their job search. Here’s our <a href="http://www.theladders.com/member/career-newsletters/please-review-the-other-applicants-for-this-job-first-">founder’s take on it</a>.</p>
+
+<p>We’ve grown a lot in the past eight years. With more than 5 million jobseekers and 31,000 recruiters and employers, we have embarked on a large infrastructure rebuild,  launched powerful caching with Varnish for our web-services layer, and we are leveraging Storm for processing our long-running match and email tasks. Our move from MySQL to Clustrix continues, and dozens of DB slaves are going offline as we increase our load on the Clustrix database. And, most significantly, we are refactoring away some of the most fiddly bits of our codebase.</p>
+
+<p>Additionally, we are rebuilding our data center with shiny hardware, as well as a new network and level of resource flexibility that gets the bits from us to you, that much faster. Our DevOps team has been busy designing the new data center and ramping up for a smooth transition over the upcoming months.</p>
+
+<p>To celebrate our accomplishments so far, and to share our excitement about what is to come, we are relaunching our development blog, because the best decisions stand up to the harshest light of criticism. There are exceptionally talented people on this team, and you should meet them.</p>
+]]></content>
+  </entry>
+  
+</feed>
